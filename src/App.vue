@@ -1,0 +1,29 @@
+<template>
+	<Header />
+	<main class="py-5">
+		<RouterView />
+	</main>
+	<Footer />
+</template>
+
+<script>
+	import { mapActions } from "vuex";
+
+	import Header from "./layout/Header.vue";
+	import Footer from "./layout/Footer.vue";
+
+	export default {
+		name: "App",
+		components: { Header, Footer },
+
+		methods: {
+			...mapActions({ setUser: "auth/setUser" }),
+		},
+
+		mounted() {
+			this.setUser();
+		},
+	};
+</script>
+
+<style scoped></style>
