@@ -1,4 +1,5 @@
 import api from "../../api";
+import router from "../../router";
 
 const state = () => ({
 	tasks: [],
@@ -17,7 +18,7 @@ const mutations = {
 	},
 
 	CREATE_TASK(state, payload) {
-		state.tasks.push({ payload });
+		state.tasks.push(payload);
 	},
 
 	EDIT_TASK(state, payload) {
@@ -59,8 +60,9 @@ const actions = {
 	createTask({ commit }, context) {
 		api.tasks
 			.createTask(context)
-			.then(() => {
-				commit("CREATE_TASK", context);
+			.then(async res => {
+				await commit("CREATE_TASK", { ...context, id: res.data.id });
+				router.push("/");
 			})
 			.catch(err => console.error(err));
 	},

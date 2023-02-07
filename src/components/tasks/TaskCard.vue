@@ -46,7 +46,10 @@
 			},
 
 			handleComplete() {
-				this.completeTask({ id: this.task.id, completed: !this.task.completed });
+				this.completeTask({
+					...this.task,
+					completed: !this.task.completed,
+				});
 			},
 		},
 	};

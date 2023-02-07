@@ -25,7 +25,6 @@
 
 <script>
 	import { mapActions, mapGetters } from "vuex";
-	import { v4 as uuid } from "uuid";
 
 	export default {
 		name: "TaskForm",
@@ -55,7 +54,6 @@
 					});
 				} else {
 					this.createTask({
-						id: uuid(),
 						title: this.title,
 						description: this.description,
 						completed: false,
@@ -64,8 +62,6 @@
 
 				this.title = "";
 				this.description = "";
-
-				this.$router.push("/");
 			},
 		},
 
