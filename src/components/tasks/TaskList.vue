@@ -1,6 +1,6 @@
 <template>
 	<div class="d-flex justify-content-between">
-		<h1>Task List</h1>
+		<h2>Task List</h2>
 		<router-link :to="{ name: 'newTask' }" class="btn btn-primary pt-2"> Add task </router-link>
 	</div>
 	<div>

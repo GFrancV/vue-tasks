@@ -10,6 +10,7 @@
 					class="form-control"
 					placeholder="Task title..."
 					v-model="title"
+					required
 				/>
 			</div>
 			<div class="mb-3">

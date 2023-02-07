@@ -53,6 +53,7 @@ const actions = {
 			.then(() => {
 				commit("LOGOUT_USER");
 				store.dispatch("tasks/cleanTasks");
+				router.push("/");
 			})
 			.catch(err => console.log(err));
 	},

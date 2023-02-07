@@ -7,8 +7,8 @@
 					<li class="nav-item">
 						<router-link :to="{ name: 'home' }" class="nav-link active">Home</router-link>
 					</li>
-					<li class="nav-item">
-						<router-link :to="{ name: 'about' }" class="nav-link">About</router-link>
+					<li v-if="logged" class="nav-item">
+						<router-link :to="{ name: 'tasks' }" class="nav-link">Tasks</router-link>
 					</li>
 				</ul>
 				<div v-if="!logged">
