@@ -26,7 +26,7 @@ const mutations = {
 };
 
 const actions = {
-	setUser({ commit }) {
+	getUser({ commit }) {
 		api.auth
 			.getUser()
 			.then(res => {

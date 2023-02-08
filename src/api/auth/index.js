@@ -6,13 +6,8 @@ export default {
 	},
 
 	login: async userCredentials => {
-		let user = "";
-
-		await request.get("/sanctum/csrf-cookie").then(async () => {
-			await request.post("login", userCredentials).then(res => (user = res.data));
-		});
-
-		return user;
+		await request.get("/sanctum/csrf-cookie");
+		return (await request.post("login", userCredentials)).data;
 	},
 
 	logout: () => {

@@ -15,14 +15,6 @@
 	export default {
 		name: "App",
 		components: { Header, Footer },
-
-		methods: {
-			...mapActions({ setUser: "auth/setUser" }),
-		},
-
-		mounted() {
-			this.setUser();
-		},
 	};
 </script>
 

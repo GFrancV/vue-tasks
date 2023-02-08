@@ -7,6 +7,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 //import "./assets/main.css";
 
+store.dispatch("auth/getUser");
+
 const app = createApp(App);
 
 app.use(router).use(store);
