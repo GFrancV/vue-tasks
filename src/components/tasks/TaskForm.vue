@@ -17,14 +17,16 @@
 				<label for="taskTitle" class="form-label">Task description</label>
 				<textarea class="form-control" placeholder="Task description..." v-model="description"></textarea>
 			</div>
-			<button type="submit" class="btn btn-primary me-3">{{ taskId ? "Edit Task" : "Add Task" }}</button>
-			<router-link type="button" class="btn btn-secondary" :to="{ name: 'home' }">Cancel</router-link>
+			<button-loading :loading="loading" :message="btnMessage" />
+			<router-link type="button" class="btn btn-secondary ms-3" :to="{ name: 'tasks' }">Cancel</router-link>
 		</form>
 	</div>
 </template>
 
 <script>
 	import { mapActions, mapGetters } from "vuex";
+
+	import ButtonLoading from "../ButtonLoading.vue";
 
 	export default {
 		name: "TaskForm",
@@ -34,10 +36,14 @@
 				required: false,
 			},
 		},
+		components: {
+			ButtonLoading,
+		},
 		data() {
 			return {
 				title: "",
 				description: "",
+				loading: false,
 			};
 		},
 
@@ -45,6 +51,8 @@
 			...mapActions({ createTask: "tasks/createTask", editTask: "tasks/editTask" }),
 
 			handleSubmit() {
+				this.loading = true;
+
 				if (this.taskId) {
 					this.editTask({
 						id: this.taskId,
@@ -67,6 +75,10 @@
 
 		computed: {
 			...mapGetters({ getTask: "tasks/getTask" }),
+
+			btnMessage() {
+				return this.taskId ? "Edit Task" : "Add Task";
+			},
 		},
 
 		mounted() {
