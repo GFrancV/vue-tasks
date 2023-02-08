@@ -2,7 +2,7 @@
 	<div class="container">
 		<h1>Home</h1>
 		<p>Simple task SPA .</p>
-		<task-list v-if="logged" />
+		<task-list v-if="logged" :tasksToList="tasks" />
 	</div>
 </template>
 
@@ -16,6 +16,7 @@
 
 		computed: {
 			...mapGetters({ logged: "auth/getLogged" }),
+			...mapGetters({ tasks: "tasks/getUncompletedTasks" }),
 		},
 	};
 </script>

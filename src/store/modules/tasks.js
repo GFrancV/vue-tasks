@@ -7,6 +7,11 @@ const state = () => ({
 
 const getters = {
 	getTasks: state => state.tasks,
+
+	getCompletedTasks: state => state.tasks.filter(task => task.completed),
+
+	getUncompletedTasks: state => state.tasks.filter(task => !task.completed),
+
 	getTask: state => id => {
 		return state.tasks.find(task => task.id == id);
 	},
@@ -60,9 +65,9 @@ const actions = {
 	createTask({ commit }, context) {
 		api.tasks
 			.createTask(context)
-			.then(async res => {
-				await commit("CREATE_TASK", { ...context, id: res.data.id });
-				router.push("/");
+			.then(res => {
+				commit("CREATE_TASK", { ...context, id: res.data.id });
+				router.go("-1");
 			})
 			.catch(err => console.error(err));
 	},
@@ -72,6 +77,7 @@ const actions = {
 			.updateTask(context)
 			.then(() => {
 				commit("EDIT_TASK", context);
+				router.push("/");
 			})
 			.catch(err => console.error(err));
 	},
