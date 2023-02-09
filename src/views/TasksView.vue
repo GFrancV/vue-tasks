@@ -7,7 +7,7 @@
 
 		<task-list :title="'Tasks to do'" :tasksToList="uncompletedTasks" />
 
-		<div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+		<div v-if="completedTasks.length > 0" class="accordion accordion-flush mt-5" id="accordionFlushExample">
 			<div class="accordion-item">
 				<h2 class="accordion-header" id="flush-headingOne">
 					<button

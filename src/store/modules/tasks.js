@@ -3,6 +3,7 @@ import router from "../../router";
 
 const state = () => ({
 	tasks: [],
+	loading: false,
 });
 
 const getters = {
@@ -15,34 +16,36 @@ const getters = {
 	getTask: state => id => {
 		return state.tasks.find(task => task.id == id);
 	},
+
+	tasksLoading: state => state.loading,
 };
 
 const mutations = {
-	SET_TASKS(state, payload) {
-		state.tasks = payload;
+	SET_TASKS(state, tasks) {
+		state.tasks = tasks;
 	},
 
-	CREATE_TASK(state, payload) {
-		state.tasks.push(payload);
+	CREATE_TASK(state, task) {
+		state.tasks.push(task);
 	},
 
-	EDIT_TASK(state, payload) {
-		const foundTask = state.tasks.find(task => task.id == payload.id);
+	EDIT_TASK(state, task) {
+		const foundTask = state.tasks.find(task => task.id == task.id);
 		if (foundTask) {
-			foundTask.title = payload.title;
-			foundTask.description = payload.description;
+			foundTask.title = task.title;
+			foundTask.description = task.description;
 		}
 	},
 
-	COMPLETE_TASK(state, payload) {
-		const foundTask = state.tasks.find(task => task.id == payload.id);
+	COMPLETE_TASK(state, task) {
+		const foundTask = state.tasks.find(task => task.id == task.id);
 		if (foundTask) {
-			foundTask.completed = payload.completed;
+			foundTask.completed = task.completed ? 1 : 0;
 		}
 	},
 
-	DELETE_TASK(state, payload) {
-		const foundTask = state.tasks.find(task => task.id == payload.id);
+	DELETE_TASK(state, task) {
+		const foundTask = state.tasks.find(task => task.id == task.id);
 		if (foundTask) {
 			state.tasks.splice(state.tasks.indexOf(foundTask), 1);
 		}
@@ -54,8 +57,13 @@ const mutations = {
 };
 
 const actions = {
-	getTasks({ commit }) {
-		api.tasks.getTasks().then(res => commit("SET_TASKS", res.data));
+	getTasks({ commit, state }) {
+		state.loading = true;
+
+		api.tasks.getTasks().then(res => {
+			commit("SET_TASKS", res.data);
+			state.loading = false;
+		});
 	},
 
 	cleanTasks({ commit }) {
