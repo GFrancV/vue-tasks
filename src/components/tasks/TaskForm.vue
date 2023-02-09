@@ -50,26 +50,25 @@
 		methods: {
 			...mapActions({ createTask: "tasks/createTask", editTask: "tasks/editTask" }),
 
-			handleSubmit() {
+			async handleSubmit() {
 				this.loading = true;
+				const task = {
+					title: this.title,
+					description: this.description,
+					completed: false,
+				};
 
-				if (this.taskId) {
-					this.editTask({
-						id: this.taskId,
-						title: this.title,
-						description: this.description,
-						completed: false,
-					});
-				} else {
-					this.createTask({
-						title: this.title,
-						description: this.description,
-						completed: false,
-					});
+				try {
+					if (this.taskId)
+						await this.editTask({
+							...task,
+							id: this.taskId,
+						});
+					else await this.createTask(task);
+				} catch (error) {
+					console.lgo;
+					this.loading = false;
 				}
-
-				this.title = "";
-				this.description = "";
 			},
 		},
 
