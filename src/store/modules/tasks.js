@@ -1,3 +1,4 @@
+import { toast } from "vue3-toastify";
 import api from "../../api";
 import router from "../../router";
 
@@ -77,9 +78,13 @@ const actions = {
 				.then(res => {
 					commit("CREATE_TASK", { ...task, id: res.data.id });
 					resolve();
-					router.go("-1");
+					router.push({ name: "tasks" });
+					toast.success("Task added successfully.");
 				})
-				.catch(err => reject(err));
+				.catch(err => {
+					reject(err);
+					toast.error(err.response.data.message);
+				});
 		});
 	},
 
@@ -91,8 +96,12 @@ const actions = {
 					commit("EDIT_TASK", task);
 					resolve();
 					router.push("/");
+					toast.success("Task edited successfully.");
 				})
-				.catch(err => reject(err));
+				.catch(err => {
+					reject(err);
+					toast.error(err.response.data.message);
+				});
 		});
 	},
 
@@ -101,8 +110,12 @@ const actions = {
 			.updateTask(task)
 			.then(() => {
 				commit("COMPLETE_TASK", task);
+				toast.info("Task completed.");
 			})
-			.catch(err => console.error(err));
+			.catch(err => {
+				console.error(err);
+				toast.error(err.response.data.message);
+			});
 	},
 
 	deleteTask({ commit }, task) {
@@ -110,8 +123,12 @@ const actions = {
 			.deleteTask(task)
 			.then(() => {
 				commit("DELETE_TASK", task);
+				toast.success("Task deleted successfully.");
 			})
-			.catch(err => console.error(err));
+			.catch(err => {
+				console.error(err);
+				toast.error(err.response.data.message);
+			});
 	},
 };
 

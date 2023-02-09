@@ -1,26 +1,23 @@
 <template>
-	<div class="container">
-		<h1>{{ taskId ? "Edit Task" : "Add Task" }}</h1>
-		<form @submit.prevent="handleSubmit">
-			<div class="mb-3">
-				<label for="taskTitle" class="form-label">Task title</label>
-				<input
-					name="taskTitle"
-					type="text"
-					class="form-control"
-					placeholder="Task title..."
-					v-model="title"
-					required
-				/>
-			</div>
-			<div class="mb-3">
-				<label for="taskTitle" class="form-label">Task description</label>
-				<textarea class="form-control" placeholder="Task description..." v-model="description"></textarea>
-			</div>
-			<button-loading :loading="loading" :message="btnMessage" />
-			<router-link type="button" class="btn btn-secondary ms-3" :to="{ name: 'tasks' }">Cancel</router-link>
-		</form>
-	</div>
+	<form @submit.prevent="handleSubmit">
+		<div class="mb-3">
+			<label for="taskTitle" class="form-label">Task title</label>
+			<input
+				name="taskTitle"
+				type="text"
+				class="form-control"
+				placeholder="Task title..."
+				v-model="title"
+				required
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="taskTitle" class="form-label">Task description</label>
+			<textarea class="form-control" placeholder="Task description..." v-model="description"></textarea>
+		</div>
+		<button-loading :loading="loading" :message="btnMessage" />
+		<router-link type="button" class="btn btn-secondary ms-3" :to="{ name: 'tasks' }">Cancel</router-link>
+	</form>
 </template>
 
 <script>

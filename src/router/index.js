@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
+import store from "../store";
+
 import HomeView from "../views/HomeView.vue";
 import TasksView from "../views/TasksView.vue";
-import TaskForm from "../components/tasks/TaskForm.vue";
+import AddTaskView from "../views/AddTaskView.vue";
+import EditTaskView from "../views/EditTaskView.vue";
 import LoginView from "../views/LoginView.vue";
-import { mapGetters } from "vuex";
-import store from "../store";
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,7 +31,7 @@ const router = createRouter({
 		{
 			path: "/tasks/new",
 			name: "newTask",
-			component: TaskForm,
+			component: AddTaskView,
 			meta: {
 				needsAuth: true,
 			},
@@ -38,7 +39,7 @@ const router = createRouter({
 		{
 			path: "/tasks/:taskId",
 			name: "editTask",
-			component: TaskForm,
+			component: EditTaskView,
 			props: true,
 			meta: {
 				needsAuth: true,

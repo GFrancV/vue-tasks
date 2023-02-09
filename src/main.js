@@ -8,7 +8,7 @@ import "vue3-toastify/dist/index.css";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
-//import "./assets/main.css";
+import "./assets/main.css";
 
 store.dispatch("auth/getUser");
 

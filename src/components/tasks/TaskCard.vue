@@ -25,7 +25,7 @@
 				>
 					Edit
 				</router-link>
-				<button @click="handleDelete" class="btn btn-danger">Delete</button>
+				<button-loading @click="handleDelete" :message="'Delete'" :loading="loading" :style="'btn-danger'" />
 			</div>
 		</div>
 	</div>
@@ -33,8 +33,10 @@
 
 <script>
 	import { mapActions } from "vuex";
+	import ButtonLoading from "../ButtonLoading.vue";
 
 	export default {
+		components: { ButtonLoading },
 		name: "TaskCard",
 		props: {
 			task: {
@@ -42,12 +44,18 @@
 				required: true,
 			},
 		},
+		data() {
+			return {
+				loading: false,
+			};
+		},
 
 		methods: {
 			...mapActions({ deleteTask: "tasks/deleteTask", completeTask: "tasks/completeTask" }),
 
 			handleDelete() {
 				if (confirm("Are you sure?")) {
+					this.loading = true;
 					this.deleteTask(this.task);
 				}
 			},

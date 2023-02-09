@@ -16,12 +16,4 @@
 	};
 </script>
 
-<style scoped>
-	.login-container {
-		max-width: 550px;
-		margin-right: auto;
-		margin-left: auto;
-		border-radius: 15px;
-		padding: 1rem;
-	}
-</style>
+<style></style>
