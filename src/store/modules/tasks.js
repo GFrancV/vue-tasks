@@ -71,23 +71,29 @@ const actions = {
 	},
 
 	createTask({ commit }, task) {
-		api.tasks
-			.createTask(task)
-			.then(res => {
-				commit("CREATE_TASK", { ...task, id: res.data.id });
-				router.go("-1");
-			})
-			.catch(err => console.error(err));
+		return new Promise((resolve, reject) => {
+			api.tasks
+				.createTask(task)
+				.then(res => {
+					commit("CREATE_TASK", { ...task, id: res.data.id });
+					resolve();
+					router.go("-1");
+				})
+				.catch(err => reject(err));
+		});
 	},
 
 	editTask({ commit }, task) {
-		api.tasks
-			.updateTask(task)
-			.then(() => {
-				commit("EDIT_TASK", task);
-				router.push("/");
-			})
-			.catch(err => console.error(err));
+		return new Promise((resolve, reject) => {
+			api.tasks
+				.updateTask(task)
+				.then(() => {
+					commit("EDIT_TASK", task);
+					resolve();
+					router.push("/");
+				})
+				.catch(err => reject(err));
+		});
 	},
 
 	completeTask({ commit }, task) {

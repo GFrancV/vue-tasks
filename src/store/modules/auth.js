@@ -1,3 +1,4 @@
+import { toast } from "vue3-toastify";
 import store from "..";
 import api from "../../api";
 import router from "../../router";
@@ -37,14 +38,21 @@ const actions = {
 	},
 
 	login({ commit }, context) {
-		api.auth
-			.login(context)
-			.then(user => {
-				commit("LOGIN_USER", user);
-				store.dispatch("tasks/getTasks");
-				router.push("/");
-			})
-			.catch(err => console.log(err));
+		return new Promise((resolve, reject) => {
+			api.auth
+				.login(context)
+				.then(user => {
+					commit("LOGIN_USER", user);
+					store.dispatch("tasks/getTasks");
+					resolve();
+					router.push("/");
+					toast.success(`Welcome ${user.name}`);
+				})
+				.catch(err => {
+					reject(err.response.data);
+					toast.error(err.response.data.message);
+				});
+		});
 	},
 
 	logout({ commit }) {
@@ -54,6 +62,7 @@ const actions = {
 				commit("LOGOUT_USER");
 				store.dispatch("tasks/cleanTasks");
 				router.push("/");
+				toast.success("Logout success!");
 			})
 			.catch(err => console.log(err));
 	},
