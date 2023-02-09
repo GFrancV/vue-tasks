@@ -2,8 +2,8 @@ import api from "../../api";
 import router from "../../router";
 
 const state = () => ({
-	tasks: [],
 	loading: false,
+	tasks: [],
 });
 
 const getters = {
@@ -13,8 +13,8 @@ const getters = {
 
 	getUncompletedTasks: state => state.tasks.filter(task => !task.completed),
 
-	getTask: state => id => {
-		return state.tasks.find(task => task.id == id);
+	getTask: state => taskId => {
+		return state.tasks.find(task => task.id == taskId);
 	},
 
 	tasksLoading: state => state.loading,
@@ -25,27 +25,27 @@ const mutations = {
 		state.tasks = tasks;
 	},
 
-	CREATE_TASK(state, task) {
-		state.tasks.push(task);
+	CREATE_TASK(state, taskAdded) {
+		state.tasks.push(taskAdded);
 	},
 
-	EDIT_TASK(state, task) {
-		const foundTask = state.tasks.find(task => task.id == task.id);
+	EDIT_TASK(state, taskEdited) {
+		const foundTask = state.tasks.find(task => task.id == taskEdited.id);
 		if (foundTask) {
-			foundTask.title = task.title;
-			foundTask.description = task.description;
+			foundTask.title = taskEdited.title;
+			foundTask.description = taskEdited.description;
 		}
 	},
 
-	COMPLETE_TASK(state, task) {
-		const foundTask = state.tasks.find(task => task.id == task.id);
+	COMPLETE_TASK(state, taskCompleted) {
+		const foundTask = state.tasks.find(task => task.id == taskCompleted.id);
 		if (foundTask) {
-			foundTask.completed = task.completed ? 1 : 0;
+			foundTask.completed = taskCompleted.completed ? 1 : 0;
 		}
 	},
 
-	DELETE_TASK(state, task) {
-		const foundTask = state.tasks.find(task => task.id == task.id);
+	DELETE_TASK(state, taskDeleted) {
+		const foundTask = state.tasks.find(task => task.id == taskDeleted.id);
 		if (foundTask) {
 			state.tasks.splice(state.tasks.indexOf(foundTask), 1);
 		}
@@ -70,40 +70,40 @@ const actions = {
 		commit("CLEAN_TASKS");
 	},
 
-	createTask({ commit }, context) {
+	createTask({ commit }, task) {
 		api.tasks
-			.createTask(context)
+			.createTask(task)
 			.then(res => {
-				commit("CREATE_TASK", { ...context, id: res.data.id });
+				commit("CREATE_TASK", { ...task, id: res.data.id });
 				router.go("-1");
 			})
 			.catch(err => console.error(err));
 	},
 
-	editTask({ commit }, context) {
+	editTask({ commit }, task) {
 		api.tasks
-			.updateTask(context)
+			.updateTask(task)
 			.then(() => {
-				commit("EDIT_TASK", context);
+				commit("EDIT_TASK", task);
 				router.push("/");
 			})
 			.catch(err => console.error(err));
 	},
 
-	completeTask({ commit }, context) {
+	completeTask({ commit }, task) {
 		api.tasks
-			.updateTask(context)
+			.updateTask(task)
 			.then(() => {
-				commit("COMPLETE_TASK", context);
+				commit("COMPLETE_TASK", task);
 			})
 			.catch(err => console.error(err));
 	},
 
-	deleteTask({ commit }, context) {
+	deleteTask({ commit }, task) {
 		api.tasks
-			.deleteTask(context)
+			.deleteTask(task)
 			.then(() => {
-				commit("DELETE_TASK", context);
+				commit("DELETE_TASK", task);
 			})
 			.catch(err => console.error(err));
 	},
