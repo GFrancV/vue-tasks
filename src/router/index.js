@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import TasksView from "../views/TasksView.vue";
 import TaskForm from "../components/tasks/TaskForm.vue";
-import LoginForm from "../components/LoginForm.vue";
+import LoginView from "../views/LoginView.vue";
 import { mapGetters } from "vuex";
 import store from "../store";
 
@@ -17,7 +17,7 @@ const router = createRouter({
 		{
 			path: "/login",
 			name: "login",
-			component: LoginForm,
+			component: LoginView,
 		},
 		{
 			path: "/tasks",
