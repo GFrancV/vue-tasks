@@ -1,5 +1,5 @@
 <template>
-	<form @submit.prevent="handleSubmit" class="needs-validation" novalidate>
+	<form @submit.prevent="handleSubmit" class="needs-validation">
 		<div class="mb-3">
 			<label class="form-label" for="emailInput">Email</label>
 			<input

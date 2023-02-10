@@ -55,6 +55,24 @@ const actions = {
 		});
 	},
 
+	register({ dispatch }, userInformation) {
+		return new Promise((resolve, reject) => {
+			api.auth
+				.register(userInformation)
+				.then(() => {
+					resolve();
+					router.push("/");
+					toast.success(`Registred successfuly. Welcome ${userInformation.name}.`);
+
+					dispatch("getUser");
+				})
+				.catch(err => {
+					reject(err.response.data);
+					toast.error(err.response.data.message);
+				});
+		});
+	},
+
 	logout({ commit }) {
 		api.auth
 			.logout()

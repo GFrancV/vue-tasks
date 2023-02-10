@@ -10,6 +10,10 @@ export default {
 		return (await request.post("login", userCredentials)).data;
 	},
 
+	register: userInformation => {
+		return request.post("register", userInformation);
+	},
+
 	logout: () => {
 		return request.post("logout");
 	},
