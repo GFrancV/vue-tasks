@@ -7,8 +7,6 @@
 </template>
 
 <script>
-	import { mapActions } from "vuex";
-
 	import Header from "./layout/Header.vue";
 	import Footer from "./layout/Footer.vue";
 

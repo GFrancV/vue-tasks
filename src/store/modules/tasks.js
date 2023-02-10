@@ -82,7 +82,7 @@ const actions = {
 					toast.success("Task added successfully.");
 				})
 				.catch(err => {
-					reject(err);
+					reject(err.response.data);
 					toast.error(err.response.data.message);
 				});
 		});
@@ -99,7 +99,7 @@ const actions = {
 					toast.success("Task edited successfully.");
 				})
 				.catch(err => {
-					reject(err);
+					reject(err.response.data);
 					toast.error(err.response.data.message);
 				});
 		});

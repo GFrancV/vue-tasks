@@ -54,11 +54,13 @@ const router = createRouter({
 	],
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
 	const logged = store.getters["auth/getLogged"];
 
 	if (to.meta.needsAuth && !logged) {
 		next("/login");
+	} else if (logged && (to.name == "login" || to.name == "register")) {
+		next("/");
 	} else {
 		next();
 	}

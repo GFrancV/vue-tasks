@@ -1,19 +1,10 @@
 <template>
 	<form @submit.prevent="handleSubmit">
 		<div class="mb-3">
-			<label for="taskTitle" class="form-label">Task title</label>
-			<input
-				name="taskTitle"
-				type="text"
-				class="form-control"
-				placeholder="Task title..."
-				v-model="title"
-				required
-			/>
+			<input-text title="Task title" name="title" type="text" v-model="title" :errors="errors" />
 		</div>
 		<div class="mb-3">
-			<label for="taskTitle" class="form-label">Task description</label>
-			<textarea class="form-control" placeholder="Task description..." v-model="description"></textarea>
+			<input-text-area title="Task description" name="description" v-model="description" :errors="errors" />
 		</div>
 		<button-loading :loading="loading" :message="btnMessage" />
 		<router-link type="button" class="btn btn-secondary ms-3" :to="{ name: 'tasks' }">Cancel</router-link>
@@ -23,6 +14,8 @@
 <script>
 	import { mapActions, mapGetters } from "vuex";
 
+	import InputText from "../inputs/InputText.vue";
+	import InputTextArea from "../inputs/InputTextArea.vue";
 	import ButtonLoading from "../ButtonLoading.vue";
 
 	export default {
@@ -33,14 +26,13 @@
 				required: false,
 			},
 		},
-		components: {
-			ButtonLoading,
-		},
+		components: { ButtonLoading, InputText, InputTextArea },
 		data() {
 			return {
 				title: "",
 				description: "",
 				loading: false,
+				errors: {},
 			};
 		},
 
@@ -62,8 +54,8 @@
 							id: this.taskId,
 						});
 					else await this.createTask(task);
-				} catch (error) {
-					console.lgo;
+				} catch (err) {
+					this.errors = err.errors;
 					this.loading = false;
 				}
 			},

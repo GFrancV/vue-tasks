@@ -9,6 +9,7 @@
 </template>
 
 <script>
+	import { mapGetters } from "vuex";
 	import LoginForm from "../components/auth/LoginForm.vue";
 
 	export default {
