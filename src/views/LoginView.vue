@@ -1,5 +1,5 @@
 <template>
-	<div class="login-container border">
+	<div class="forms-container border">
 		<h1>Login</h1>
 		<login-form class="mt-4" />
 	</div>

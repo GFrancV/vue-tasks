@@ -1,5 +1,5 @@
 <template>
-	<div class="login-container border">
+	<div class="forms-container border">
 		<h1>Edit Task</h1>
 		<task-form :taskId="taskId" />
 	</div>
