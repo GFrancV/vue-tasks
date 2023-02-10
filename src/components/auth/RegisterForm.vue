@@ -23,10 +23,9 @@
 </template>
 
 <script>
-	import ButtonLoading from "./ButtonLoading.vue";
-	import InputText from "./inputs/InputText.vue";
+	import ButtonLoading from "../ButtonLoading.vue";
+	import InputText from "../inputs/InputText.vue";
 
-	import api from "../api";
 	import { mapActions } from "vuex";
 
 	export default {
