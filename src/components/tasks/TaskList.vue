@@ -6,14 +6,14 @@
 			Total tasks: <span class="fw-bold">{{ tasksToList.length }}</span>
 		</p>
 		<div v-if="tasksToList.length > 0" class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-3">
-			<template v-for="task in tasksToList" :key="task.id">
+			<template v-for="task in tasksToList" :key="task['_id']">
 				<task-card :task="task" />
 			</template>
 		</div>
 		<div v-else class="text-center">
 			<p class="fs-1 text-muted">You don't have tasks yet!</p>
-		</div>
-	</template>
+		</div> </template
+	>1
 </template>
 
 <script>
