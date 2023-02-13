@@ -1,7 +1,6 @@
 import axios from "axios";
-import config from "../../app.config";
 
-const baseURL = config.backend.url;
+const baseURL = import.meta.env.VITE_API_URL;
 
 const request = axios.create({
 	baseURL,

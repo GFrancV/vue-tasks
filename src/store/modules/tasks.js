@@ -15,7 +15,7 @@ const getters = {
 	getUncompletedTasks: state => state.tasks.filter(task => !task.completed),
 
 	getTask: state => taskId => {
-		return state.tasks.find(task => task.id == taskId);
+		return state.tasks.find(task => task["_id"] == taskId);
 	},
 
 	tasksLoading: state => state.loading,
@@ -31,7 +31,7 @@ const mutations = {
 	},
 
 	EDIT_TASK(state, taskEdited) {
-		const foundTask = state.tasks.find(task => task.id == taskEdited.id);
+		const foundTask = state.tasks.find(task => task["_id"] == taskEdited["_id"]);
 		if (foundTask) {
 			foundTask.title = taskEdited.title;
 			foundTask.description = taskEdited.description;
@@ -39,14 +39,14 @@ const mutations = {
 	},
 
 	COMPLETE_TASK(state, taskCompleted) {
-		const foundTask = state.tasks.find(task => task.id == taskCompleted.id);
+		const foundTask = state.tasks.find(task => task["_id"] == taskCompleted["_id"]);
 		if (foundTask) {
 			foundTask.completed = taskCompleted.completed ? 1 : 0;
 		}
 	},
 
 	DELETE_TASK(state, taskDeleted) {
-		const foundTask = state.tasks.find(task => task.id == taskDeleted.id);
+		const foundTask = state.tasks.find(task => task["_id"] == taskDeleted["_id"]);
 		if (foundTask) {
 			state.tasks.splice(state.tasks.indexOf(foundTask), 1);
 		}
@@ -76,7 +76,7 @@ const actions = {
 			api.tasks
 				.createTask(task)
 				.then(res => {
-					commit("CREATE_TASK", { ...task, id: res.data.id });
+					commit("CREATE_TASK", { ...task, _id: res.data["_id"] });
 					resolve();
 					router.push({ name: "tasks" });
 					toast.success("Task added successfully.");

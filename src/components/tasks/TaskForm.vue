@@ -51,7 +51,7 @@
 					if (this.taskId)
 						await this.editTask({
 							...task,
-							id: this.taskId,
+							_id: this.taskId,
 						});
 					else await this.createTask(task);
 				} catch (err) {

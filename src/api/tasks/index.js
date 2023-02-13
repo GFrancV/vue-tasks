@@ -10,10 +10,10 @@ export default {
 	},
 
 	updateTask(task) {
-		return request.put(`api/tasks/${task.id}`, task);
+		return request.put(`api/tasks/${task["_id"]}`, task);
 	},
 
 	deleteTask(task) {
-		return request.delete(`api/tasks/${task.id}`);
+		return request.delete(`api/tasks/${task["_id"]}`);
 	},
 };

@@ -20,7 +20,7 @@
 			<div class="btn-group" role="group" aria-label="Task actions">
 				<router-link
 					v-if="!task.completed"
-					:to="{ name: 'editTask', params: { taskId: task.id } }"
+					:to="{ name: 'editTask', params: { taskId: task['_id'] } }"
 					class="btn btn-primary"
 				>
 					Edit
