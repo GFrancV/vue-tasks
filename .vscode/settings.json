@@ -1,0 +1,15 @@
+{
+	"conventionalCommits.scopes": [
+		"tasks",
+		"routes",
+		"components",
+		"api",
+		"tasks-store",
+		"login",
+		"input-components",
+		"containers",
+		"auth",
+		"deployment",
+		"electrone"
+	]
+}
