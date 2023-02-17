@@ -91,7 +91,7 @@ const actions = {
 	editTask({ commit }, task) {
 		return new Promise((resolve, reject) => {
 			api.tasks
-				.updateTask(task)
+				.updateTask(task._id, { title: task.title, description: task.description, completed: task.completed })
 				.then(() => {
 					commit("EDIT_TASK", task);
 					resolve();
@@ -107,7 +107,7 @@ const actions = {
 
 	completeTask({ commit }, task) {
 		api.tasks
-			.updateTask(task)
+			.updateTask(task._id, { title: task.title, description: task.description, completed: task.completed })
 			.then(() => {
 				commit("COMPLETE_TASK", task);
 				toast.info("Task completed.");

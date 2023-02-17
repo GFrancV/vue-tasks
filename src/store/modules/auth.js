@@ -1,7 +1,10 @@
+import Cookies from "js-cookie";
 import { toast } from "vue3-toastify";
 import store from "..";
 import api from "../../api";
 import router from "../../router";
+
+import requestApi from "../../api/request";
 
 const state = () => ({
 	logged: false,
@@ -28,25 +31,30 @@ const mutations = {
 
 const actions = {
 	getUser({ commit }) {
-		api.auth
-			.getUser()
-			.then(res => {
-				commit("LOGIN_USER", res.data);
-				store.dispatch("tasks/getTasks");
-			})
-			.catch(err => console.error(`${err.response.status} ${err.response.data.message}`));
+		if (Cookies.get("token")) {
+			(requestApi.defaults.headers.common = { Authorization: `Bearer ${Cookies.get("token")}` }),
+				api.auth
+					.getUser()
+					.then(res => {
+						commit("LOGIN_USER", res.data);
+						store.dispatch("tasks/getTasks");
+					})
+					.catch(err => console.error(`${err.response.status} ${err.response.data.message}`));
+		}
 	},
 
-	login({ commit }, context) {
+	login({ dispatch }, context) {
 		return new Promise((resolve, reject) => {
 			api.auth
 				.login(context)
-				.then(user => {
-					commit("LOGIN_USER", user);
-					store.dispatch("tasks/getTasks");
+				.then(data => {
+					Cookies.set("token", data.token, { expires: 15 / 1440 });
+
+					dispatch("getUser");
+
 					resolve();
 					router.push("/");
-					toast.success(`Welcome ${user.name}`);
+					toast.success(`Welcome ${data.user.name}`);
 				})
 				.catch(err => {
 					reject(err.response.data);
@@ -59,7 +67,8 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			api.auth
 				.register(userInformation)
-				.then(() => {
+				.then(res => {
+					Cookies.set("token", res.data.token, { expires: 15 / 1440 });
 					resolve();
 					router.push("/");
 					toast.success(`Registred successfuly. Welcome ${userInformation.name}.`);
@@ -74,7 +83,12 @@ const actions = {
 	},
 
 	logout({ commit }) {
-		api.auth
+		Cookies.remove("token");
+		commit("LOGOUT_USER");
+		store.dispatch("tasks/cleanTasks");
+		router.push("/");
+		toast.success("Logout success!");
+		/* 	api.auth
 			.logout()
 			.then(() => {
 				commit("LOGOUT_USER");
@@ -82,7 +96,7 @@ const actions = {
 				router.push("/");
 				toast.success("Logout success!");
 			})
-			.catch(err => console.log(err));
+			.catch(err => console.log(err)); */
 	},
 };
 

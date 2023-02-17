@@ -9,8 +9,8 @@ export default {
 		return request.post("api/tasks", task);
 	},
 
-	updateTask(task) {
-		return request.put(`api/tasks/${task["_id"]}`, task);
+	updateTask(taskId, task) {
+		return request.put(`api/tasks/${taskId}`, task);
 	},
 
 	deleteTask(task) {

@@ -12,9 +12,10 @@
 		<div class="mb-3">
 			<input-text
 				title="Password Confirmation"
-				name="passwordConfirmation"
+				name="password_confirmation"
 				type="password"
 				v-model="passwordConfirmation"
+				:errors="errors"
 			/>
 		</div>
 
