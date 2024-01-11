@@ -1,35 +1,65 @@
-# vue-tasks
+<div align="center">
+	<img src="public/favicon.ico" height="50px" width="auto" />
+	<h1>Vue Tasks</h1>
+</div>
 
-This template should help get you started developing with Vue 3 in Vite.
+<div align="center">
+  <h3>
+    <a href="https://gfrancv.github.io/vue-tasks/">
+      Demo
+    </a>
+  </h3>
+</div>
 
-## Recommended IDE Setup
+<div align="center">
+  <a href="#overview">Overview</a>
+  •
+  <a href="#stack">Stack</a>
+  •
+  <a href="#features">Features</a>
+  •
+  <a href="#design">Design</a>
+  •
+  <a href="#external-use">External use</a>
+  •
+  <a href="#useful-links">Useful links</a>
+</div>
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+<br>
 
-## Customize configuration
+<div align="center">
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+![Vue Badge](https://img.shields.io/badge/Vue-BC52EE?style=for-the-badge&logo=vuedotjs&labelColor=34495e&color=34495e)
+![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
 
-## Project Setup
+</div>
 
-```sh
-npm install
-```
+## Overview
 
-### Compile and Hot-Reload for Development
+This is a simple frontend web application to consume the [Vue Task REST API](https://github.com/GFrancV/vue-tasks-api).
 
-```sh
-npm run dev
-```
+This project is deployed on <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> and you can view and use the demo in the following <a href="hhttps://gfrancv.github.io/vue-tasks/" target="_blank">link.</a>
 
-### Compile and Minify for Production
+## Stack
 
-```sh
-npm run build
-```
+### Framework:
 
-### Lint with [ESLint](https://eslint.org/)
+- **[Vue.js](https://vuejs.org/)**
 
-```sh
-npm run lint
-```
+### Libraries:
+
+- **<a href="https://github.com/jerrywu001/vue3-toastify" target="_blank"> Vue3-Toastify :</a>** Vue3-Toastify allows you to add notifications to your app with ease.
+- **<a href="https://github.com/axios/axios" target="_blank">Axios:</a>** Promise based HTTP client for the browser and node.js
+- **<a href="https://github.com/js-cookie/js-cookie" target="_blank">js-cookie:</a>** A simple, lightweight JavaScript API for handling browser cookies.
+- **<a href="https://getbootstrap.com/" target="_blank">Bootstrap:</a>** To the styles.
+- **<a href="https://getbootstrap.com/" target="_blank">uuid:</a>** Generate RFC-compliant UUIDs in JavaScript.
+
+### Api's
+
+- **<a href="https://github.com/GFrancV/vue-tasks-api" target="_blank">Vue Tasks API :</a>** To get the geographic coordinates of a different locations.
+
+## Features
+
+In this we can view the weather of diferrent cities, you can search for the weather of any city just by entering the name of the city, abbreviation or geographic coordinates in the search engine.
+
+The application has different graphs in which you can visualize the climate of the different cities.
